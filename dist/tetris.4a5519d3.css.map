@@ -1,1 +1,0 @@
-{"mappings":"AAAA","sources":["src/app.css"],"sourcesContent":["canvas {\n  border: 1px solid;\n  width: 400px;\n  height: 800px;\n}"],"names":[],"version":3,"file":"tetris.4a5519d3.css.map","sourceRoot":"/__parcel_source_root/"}
