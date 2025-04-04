@@ -1,4 +1,4 @@
-import {ACTIVE_COLOR, X_AXIS_LOWER_BOUND, X_AXIS_HIGHER_BOUND, Y_AXIS_LOWER_BOUND, Y_AXIS_HIGHER_BOUND, EMPTY_CELL} from './constants.js'
+import {X_AXIS_LOWER_BOUND, X_AXIS_HIGHER_BOUND, Y_AXIS_LOWER_BOUND, Y_AXIS_HIGHER_BOUND, EMPTY_CELL} from './constants.js'
 
 export default class Block {
   constructor(x, y, color, matrix, snapshot) {
@@ -30,11 +30,9 @@ export default class Block {
     this.y = this.y + translation.y
   }
 
-  destroy() {
-    if (this.color > ACTIVE_COLOR) { 
-      this.color -= ACTIVE_COLOR
-      this.matrix.at(this.x,this.y).set(this.color)
-    }
+  consolidate() {
+    // Esta dependencia con matrix creo que se puede eliminar
+    this.matrix.at(this.x,this.y).set(this.color)
   }
 
   toString() {
@@ -62,11 +60,8 @@ export default class Block {
     const cell = this.matrix.at(this.x,this.y).get()
 
     const isCellEmpty = cell === EMPTY_CELL 
-    const isCellActive = cell > ACTIVE_COLOR
 
-    const isValidCell = isCellEmpty || isCellActive 
-
-    return isValidCell
+    return isCellEmpty
   }
 }
 

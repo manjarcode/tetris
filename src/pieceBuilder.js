@@ -1,7 +1,7 @@
 import Piece from './piece.js' 
 
 import {random} from './utils.js'
-import {COLS, ACTIVE_COLOR} from './constants.js'
+import {COLS} from './constants.js'
 import Block, {Vector} from './block.js'
 import { RotateTable, Rotation } from './rotateTable.js'
 import Piece360 from './piece360.js'
@@ -26,7 +26,7 @@ export default class PieceBuilder {
 
   buildSquare() {
     const x = random(COLS-1)
-    const randomColor = ACTIVE_COLOR + 1
+    const randomColor = 1
   
     const b1 = new Block(x, 0, randomColor, this.matrix)
     const b2 = new Block(x +1, 0, randomColor, this.matrix)
@@ -40,7 +40,7 @@ export default class PieceBuilder {
   
   buildT() {
     const x = 4
-    const randomColor = ACTIVE_COLOR + 2
+    const randomColor = 2
   
     const b1 = new Block(x+1, 0, randomColor, this.matrix)
     const b2 = new Block(x+1, 1, randomColor, this.matrix)
@@ -63,7 +63,7 @@ export default class PieceBuilder {
 
   buildL() {
     const x = 4
-    const randomColor = ACTIVE_COLOR + 3
+    const randomColor = 3
   
     const b1 = new Block(x+0, 0, randomColor, this.matrix)
     const b2 = new Block(x+0, 1, randomColor, this.matrix)
@@ -90,7 +90,7 @@ export default class PieceBuilder {
 
   buildLPrime() {
     const x = 4
-    const randomColor = ACTIVE_COLOR + 4
+    const randomColor = 4
   
     const b1 = new Block(x+1, 0, randomColor, this.matrix)
     const b2 = new Block(x+1, 1, randomColor, this.matrix)
@@ -117,7 +117,7 @@ export default class PieceBuilder {
 
   buildStick() {
     const x = 4
-    const randomColor = ACTIVE_COLOR + 5
+    const randomColor = 5
   
     const b1 = new Block(x, 0, randomColor, this.matrix)
     const b2 = new Block(x, 1, randomColor, this.matrix)
@@ -148,7 +148,7 @@ export default class PieceBuilder {
 
   buildS() {
     const x = 4
-    const randomColor = ACTIVE_COLOR + 6
+    const randomColor = 6
   
     const b1 = new Block(x-1, 0, randomColor, this.matrix)
     const b2 = new Block(x+0, 0, randomColor, this.matrix)
@@ -177,7 +177,7 @@ export default class PieceBuilder {
 
   buildSPrime() {
     const x = 4
-    const randomColor = ACTIVE_COLOR + 7
+    const randomColor = 7
   
     const b1 = new Block(x+1, 0, randomColor, this.matrix)
     const b2 = new Block(x+0, 0, randomColor, this.matrix)

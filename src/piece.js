@@ -61,7 +61,7 @@ export default class Piece {
 
   destroy() {
     for (const block of this.blocks) {
-      block.destroy()
+      block.consolidate()
     }
 
     for (let block of this.blocks) {
