@@ -1,4 +1,3 @@
-import { gameTooglePause } from "./game"
 import Piece from "./piece"
 
 export default class Piece180 extends Piece {
@@ -13,38 +12,27 @@ export default class Piece180 extends Piece {
       return false
     }
 
-    const rotationBlocks = this.getRotatingBlocks()
-
     const table = this.isInverted ? this.reverseRotateTable : this.rotateTable
 
-    const virtuallyRotatedBlocks = rotationBlocks.map(block => {
+    const areValid = this.blocks.reduce((result, block) => {
       const relativePosition = block.relativeTo(this.rotateCenter)
       const translation = table.apply(relativePosition)
-      return block.translate(translation)
-    })
+      return result && block.canTranslate(translation)
+    }, true)
 
-    const areValid = virtuallyRotatedBlocks.every(b => b.isValid())
     return areValid
-  }
-
-  getRotatingBlocks() {
-    return this.blocks.filter(b => b !== this.rotateCenter)
   }
 
   rotate() {
     this.takeSnapshot()
 
-    const rotationBlocks = this.getRotatingBlocks()
-
     const table = this.isInverted ? this.reverseRotateTable : this.rotateTable
 
-    this.blocks = rotationBlocks.map(block => {
+    for (const block of this.blocks) {
       const relativePosition = block.relativeTo(this.rotateCenter)
       const translation = table.apply(relativePosition)
-      return block.translate(translation)
-    })
-
-    this.blocks.push(this.rotateCenter)
+      block.simpleTranslate(translation)
+    }
     
     this.fixMatrix()
 

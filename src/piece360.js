@@ -1,4 +1,3 @@
-import { gameTooglePause } from "./game"
 import Piece from "./piece"
 
 export default class Piece360 extends Piece {
