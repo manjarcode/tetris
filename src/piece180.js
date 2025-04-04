@@ -31,7 +31,7 @@ export default class Piece180 extends Piece {
     for (const block of this.blocks) {
       const relativePosition = block.relativeTo(this.rotateCenter)
       const translation = table.apply(relativePosition)
-      block.simpleTranslate(translation)
+      block.translate(translation)
     }
     
     this.fixMatrix()

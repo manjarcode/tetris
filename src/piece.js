@@ -33,7 +33,7 @@ export default class Piece {
     this.takeSnapshot()
     
     for (const block of this.blocks) {
-      block.simpleTranslate(translation)
+      block.translate(translation)
     }
     this.fixMatrix()
   }

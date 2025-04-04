@@ -91,14 +91,6 @@ export default class Block {
   }
 
   translate(translation) {
-    const nextX = this.x + translation.x
-    const nextY = this.y + translation.y
-    console.log(`rotating [${this.x},${this.y}] -> [${nextX},${nextY}], translation [${translation.x},${translation.y}]`)
-    
-    return new Block(nextX, nextY, this.color, this.matrix, this.snapshot)
-  }
-
-  simpleTranslate(translation) {
     this.x = this.x + translation.x
     this.y = this.y + translation.y
   }
