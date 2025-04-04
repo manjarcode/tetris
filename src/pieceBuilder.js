@@ -2,7 +2,7 @@ import Piece from './piece.js'
 
 import {random} from './utils.js'
 import {COLS, ACTIVE_COLOR} from './constants.js'
-import Block, {RelativePosition} from './block.js'
+import Block, {Vector} from './block.js'
 import { RotateTable, Rotation } from './rotateTable.js'
 import Piece360 from './piece360.js'
 import Piece180 from './piece180.js'
@@ -49,11 +49,11 @@ export default class PieceBuilder {
   
     
     const rotateTable = new RotateTable([
-      new Rotation(new RelativePosition(0,0), new RelativePosition(0,0)),
-      new Rotation(new RelativePosition(-1,0), new RelativePosition(1,-1)),
-      new Rotation(new RelativePosition(1,0), new RelativePosition(-1,1)),
-      new Rotation(new RelativePosition(0,1), new RelativePosition(-1,-1)),    
-      new Rotation(new RelativePosition(0,-1), new RelativePosition(1,1)),
+      new Rotation(new Vector(0,0), new Vector(0,0)),
+      new Rotation(new Vector(-1,0), new Vector(1,-1)),
+      new Rotation(new Vector(1,0), new Vector(-1,1)),
+      new Rotation(new Vector(0,1), new Vector(-1,-1)),    
+      new Rotation(new Vector(0,-1), new Vector(1,1)),
     ])
   
     const piece = new Piece360([ b1, b2, b3, b4], b2, rotateTable)
@@ -72,15 +72,15 @@ export default class PieceBuilder {
   
     
     const rotateTable = new RotateTable([
-      new Rotation(new RelativePosition(0,0), new RelativePosition(0,0)),
-      new Rotation(new RelativePosition(-1,0), new RelativePosition(1,-1)),
-      new Rotation(new RelativePosition(1,0), new RelativePosition(-1,1)),
-      new Rotation(new RelativePosition(0,1), new RelativePosition(-1,-1)),    
-      new Rotation(new RelativePosition(0,-1), new RelativePosition(1,1)),
-      new Rotation(new RelativePosition(1,-1), new RelativePosition(0,2)),
-      new Rotation(new RelativePosition(1,1), new RelativePosition(-2,0)),
-      new Rotation(new RelativePosition(-1,1), new RelativePosition(0,-2)),
-      new Rotation(new RelativePosition(-1,-1), new RelativePosition(2,0))
+      new Rotation(new Vector(0,0), new Vector(0,0)),
+      new Rotation(new Vector(-1,0), new Vector(1,-1)),
+      new Rotation(new Vector(1,0), new Vector(-1,1)),
+      new Rotation(new Vector(0,1), new Vector(-1,-1)),    
+      new Rotation(new Vector(0,-1), new Vector(1,1)),
+      new Rotation(new Vector(1,-1), new Vector(0,2)),
+      new Rotation(new Vector(1,1), new Vector(-2,0)),
+      new Rotation(new Vector(-1,1), new Vector(0,-2)),
+      new Rotation(new Vector(-1,-1), new Vector(2,0))
     ])
   
     const piece = new Piece360([ b1, b2, b3, b4], b2, rotateTable)
@@ -99,15 +99,15 @@ export default class PieceBuilder {
   
     
     const rotateTable = new RotateTable([
-      new Rotation(new RelativePosition(0,0), new RelativePosition(0,0)),
-      new Rotation(new RelativePosition(-1,0), new RelativePosition(1,-1)),
-      new Rotation(new RelativePosition(1,0), new RelativePosition(-1,1)),
-      new Rotation(new RelativePosition(0,1), new RelativePosition(-1,-1)),    
-      new Rotation(new RelativePosition(0,-1), new RelativePosition(1,1)),
-      new Rotation(new RelativePosition(1,-1), new RelativePosition(0,2)),
-      new Rotation(new RelativePosition(1,1), new RelativePosition(-2,0)),
-      new Rotation(new RelativePosition(-1,1), new RelativePosition(0,-2)),
-      new Rotation(new RelativePosition(-1,-1), new RelativePosition(2,0))
+      new Rotation(new Vector(0,0), new Vector(0,0)),
+      new Rotation(new Vector(-1,0), new Vector(1,-1)),
+      new Rotation(new Vector(1,0), new Vector(-1,1)),
+      new Rotation(new Vector(0,1), new Vector(-1,-1)),    
+      new Rotation(new Vector(0,-1), new Vector(1,1)),
+      new Rotation(new Vector(1,-1), new Vector(0,2)),
+      new Rotation(new Vector(1,1), new Vector(-2,0)),
+      new Rotation(new Vector(-1,1), new Vector(0,-2)),
+      new Rotation(new Vector(-1,-1), new Vector(2,0))
     ])
   
     const piece = new Piece360([ b1, b2, b3, b4], b2, rotateTable)
@@ -126,17 +126,17 @@ export default class PieceBuilder {
 
 
     const rotateTable = new RotateTable([
-      new Rotation(new RelativePosition(0,0), new RelativePosition(0,0)),
-      new Rotation(new RelativePosition(0,-1), new RelativePosition(-1,1)),
-      new Rotation(new RelativePosition(0,1), new RelativePosition(1,-1)),
-      new Rotation(new RelativePosition(0,2), new RelativePosition(2,-2)),    
+      new Rotation(new Vector(0,0), new Vector(0,0)),
+      new Rotation(new Vector(0,-1), new Vector(-1,1)),
+      new Rotation(new Vector(0,1), new Vector(1,-1)),
+      new Rotation(new Vector(0,2), new Vector(2,-2)),    
     ])
 
     const inverseRotateTable = new RotateTable([
-      new Rotation(new RelativePosition(0,0), new RelativePosition(0,0)),
-      new Rotation(new RelativePosition(-1,0), new RelativePosition(1,-1)),
-      new Rotation(new RelativePosition(1,0), new RelativePosition(-1,1)),
-      new Rotation(new RelativePosition(2,0), new RelativePosition(-2,2)),  
+      new Rotation(new Vector(0,0), new Vector(0,0)),
+      new Rotation(new Vector(-1,0), new Vector(1,-1)),
+      new Rotation(new Vector(1,0), new Vector(-1,1)),
+      new Rotation(new Vector(2,0), new Vector(-2,2)),  
     ])
 
 
@@ -156,17 +156,17 @@ export default class PieceBuilder {
     const b4 = new Block(x+1, 1, randomColor, this.matrix)
 
     const rotateTable = new RotateTable([
-      new Rotation(new RelativePosition(0,0), new RelativePosition(0,0)),
-      new Rotation(new RelativePosition(-1,-1), new RelativePosition(2,0)), 
-      new Rotation(new RelativePosition(0,-1), new RelativePosition(1,1)), 
-      new Rotation(new RelativePosition(1,0), new RelativePosition(-1,1)), 
+      new Rotation(new Vector(0,0), new Vector(0,0)),
+      new Rotation(new Vector(-1,-1), new Vector(2,0)), 
+      new Rotation(new Vector(0,-1), new Vector(1,1)), 
+      new Rotation(new Vector(1,0), new Vector(-1,1)), 
     ])
 
     const inverseRotateTable = new RotateTable([
-      new Rotation(new RelativePosition(0,0), new RelativePosition(0,0)),
-      new Rotation(new RelativePosition(1,-1), new RelativePosition(-2,0)), 
-      new Rotation(new RelativePosition(1,0), new RelativePosition(-1,-1)), 
-      new Rotation(new RelativePosition(0,1), new RelativePosition(1,-1)), 
+      new Rotation(new Vector(0,0), new Vector(0,0)),
+      new Rotation(new Vector(1,-1), new Vector(-2,0)), 
+      new Rotation(new Vector(1,0), new Vector(-1,-1)), 
+      new Rotation(new Vector(0,1), new Vector(1,-1)), 
     ])
 
     const piece = new Piece180([ b1, b2, b3, b4], b3, rotateTable, inverseRotateTable)
@@ -185,17 +185,17 @@ export default class PieceBuilder {
     const b4 = new Block(x-1, 1, randomColor, this.matrix)
 
     const rotateTable = new RotateTable([
-      new Rotation(new RelativePosition(0,0), new RelativePosition(0,0)),
-      new Rotation(new RelativePosition(1,-1), new RelativePosition(-2,0)),     
-      new Rotation(new RelativePosition(0,-1), new RelativePosition(-1,1)),
-      new Rotation(new RelativePosition(-1,0), new RelativePosition(1,1)), 
+      new Rotation(new Vector(0,0), new Vector(0,0)),
+      new Rotation(new Vector(1,-1), new Vector(-2,0)),     
+      new Rotation(new Vector(0,-1), new Vector(-1,1)),
+      new Rotation(new Vector(-1,0), new Vector(1,1)), 
     ])
 
     const inverseRotateTable = new RotateTable([
-      new Rotation(new RelativePosition(0,0), new RelativePosition(0,0)),    
-      new Rotation(new RelativePosition(-1,-1), new RelativePosition(2,0)), 
-      new Rotation(new RelativePosition(-1,0), new RelativePosition(1,-1)),
-      new Rotation(new RelativePosition(0,1), new RelativePosition(-1,-1)), 
+      new Rotation(new Vector(0,0), new Vector(0,0)),    
+      new Rotation(new Vector(-1,-1), new Vector(2,0)), 
+      new Rotation(new Vector(-1,0), new Vector(1,-1)),
+      new Rotation(new Vector(0,1), new Vector(-1,-1)), 
     ])
 
     const piece = new Piece180([ b1, b2, b3, b4], b3, rotateTable, inverseRotateTable)

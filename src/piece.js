@@ -1,4 +1,4 @@
-import { RelativePosition } from "./block"
+import { Vector } from "./block"
 
 export default class Piece {
   constructor(blocks, rotateCenter, rotateTable) {
@@ -11,12 +11,12 @@ export default class Piece {
   }
 
   wannaLeft() {
-    const translation = new RelativePosition(-1,0)
+    const translation = new Vector(-1,0)
     this.#translate(translation)
   }
 
   wannaRight() {
-    const translation = new RelativePosition(1,0)
+    const translation = new Vector(1,0)
     this.#translate(translation)    
   }
 
@@ -53,12 +53,12 @@ export default class Piece {
   }
 
   canDown() {
-    const translation = new RelativePosition(0,1)
+    const translation = new Vector(0,1)
     return this.#canTranslate(translation)    
   }
 
   down() {
-    const translation = new RelativePosition(0,1)
+    const translation = new Vector(0,1)
     this.#translate(translation)
   }
 

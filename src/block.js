@@ -80,7 +80,7 @@ export default class Block {
   }
 
   relativeTo(block) {
-    return new RelativePosition(
+    return new Vector(
       this.x - block.x,
       this.y - block.y 
     )
@@ -130,7 +130,7 @@ export default class Block {
   }
 }
 
-export class RelativePosition {
+export class Vector {
   constructor(x,y) {
     this.x = x
     this.y = y
