@@ -70,7 +70,7 @@ export default class Tetris {
   draw(x, y) {
     const color = this.matrix.at(x,y).get()
     if (color > 0) {
-      this.drawer.block(x, y, color)
+      this.drawer.cell(x, y, color)
     }
   }
 
@@ -82,6 +82,10 @@ export default class Tetris {
       for (let j=0; j<ROWS; j++) {
         this.draw(i, j)
       }
+    }
+
+    for (const block of this.active.blocks) {
+      this.drawer.block(block)
     }
   }
 

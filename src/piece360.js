@@ -20,14 +20,10 @@ export default class Piece360 extends Piece {
   }
 
   rotate() {
-    this.takeSnapshot()
-
     for (const block of this.blocks) {
       const relativePosition = block.relativeTo(this.rotateCenter)
       const translation = this.rotateTable.apply(relativePosition)
       block.translate(translation)
-    }
-    
-    this.fixMatrix()
+    }    
   }
 }

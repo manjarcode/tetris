@@ -5,7 +5,7 @@ export default class Drawer {
     this.canvas = canvas
   }
 
-  block(x, y, color) {
+  cell(x, y, color) {
     const posX = x * 40
     const posY = y * 40
 
@@ -13,6 +13,12 @@ export default class Drawer {
     this.canvas.fillRect(posX, posY, BLOCK_SIZE, BLOCK_SIZE)
     this.canvas.strokeStyle = getDarkerColors(color)
     this.canvas.strokeRect(posX, posY, BLOCK_SIZE, BLOCK_SIZE)
+  }
+
+  block(block) {
+    const [x,y] = block.getPosition()
+    const color = block.getColor()
+    this.cell(x,y,color)
   }
 
   clear() {

@@ -24,8 +24,6 @@ export default class Piece180 extends Piece {
   }
 
   rotate() {
-    this.takeSnapshot()
-
     const table = this.isInverted ? this.reverseRotateTable : this.rotateTable
 
     for (const block of this.blocks) {
@@ -34,8 +32,6 @@ export default class Piece180 extends Piece {
       block.translate(translation)
     }
     
-    this.fixMatrix()
-
     this.isInverted = ! this.isInverted
   }
 }

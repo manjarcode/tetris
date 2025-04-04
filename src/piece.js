@@ -30,11 +30,9 @@ export default class Piece {
     
     if (!canMove) return
 
-    this.takeSnapshot()    
     for (const block of this.blocks) {
       block.translate(translation)
     }
-    this.fixMatrix()
   }
 
   wannaRotate() {
@@ -73,25 +71,5 @@ export default class Piece {
 
   toString() {
     return this.blocks.map(b => b.toString())
-  }
-
-  takeSnapshot() {    
-    for (const block of this.blocks) {
-      block.takeSnapshot()
-    }
-  }
-
-  fixMatrix() {
-    for (const block of this.blocks) {
-      block.cleanMatrix()
-    }
-
-    for (const block of this.blocks) {
-      block.fixMatrix()
-    }
-
-    this.blocks = this.blocks.sort((a,b) => {
-      return b.y - a.y
-    })
   }
 }
