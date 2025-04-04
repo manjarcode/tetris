@@ -17,44 +17,9 @@ export default class Block {
     return next.isValid()
   }
 
-  canDown() {
-    const nextY = this.y+1
-    const isOutOfBound = nextY >= ROWS
-
-    let hasBlockBelow= false
-    try {
-      const below = this.matrix.at(this.x,this.y+1).get()
-      hasBlockBelow = below > 0 && below < BOUND_COLOR
-      console.log('hasBlockBelow', hasBlockBelow)
-    } catch(err) {
-      console.log('ojito error', this.x, nextY, err)
-    }
-
-    return !isOutOfBound && !hasBlockBelow
-  }
-
-  down() {
-    const nextY = this.y + 1
-
-    this.moveInMatrix(this.x, nextY)
-  }
-
-  canLeft() {
-    const nextX = this.x - 1
-    return nextX >= 0   
-  }
-
-  left() {
-    this.moveInMatrix(this.x-1, this.y)
-  }
-
-  canRight() {
-    const nextX = this.x + 1
-    return nextX < COLS
-
-  }
-  right() {
-    this.moveInMatrix(this.x+1, this.y)
+  translate(translation) {
+    this.x = this.x + translation.x
+    this.y = this.y + translation.y
   }
 
   moveInMatrix(nextX, nextY) {
@@ -90,10 +55,6 @@ export default class Block {
     this.snapshot = [this.x, this.y]
   }
 
-  translate(translation) {
-    this.x = this.x + translation.x
-    this.y = this.y + translation.y
-  }
 
   cleanMatrix() {
     const [x,y] = this.snapshot

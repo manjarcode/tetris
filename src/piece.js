@@ -30,8 +30,7 @@ export default class Piece {
     
     if (!canMove) return
 
-    this.takeSnapshot()
-    
+    this.takeSnapshot()    
     for (const block of this.blocks) {
       block.translate(translation)
     }
