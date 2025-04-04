@@ -12,41 +12,31 @@ export default class Piece {
   }
 
   canTranslate(translation) {
-    const virtualBlocks = this.blocks.map(b => b.translate(translation))
-
-    const areValid = virtualBlocks.every(b => b.isValid())
-
+    const areValid = this.blocks.every(b => b.canTranslate(translation))
     return areValid    
+  }
+
+  translate(translation) {
+    const canMove = this.canTranslate(translation)
+    
+    if (!canMove) return
+
+    this.takeSnapshot()
+    
+    for (const block of this.blocks) {
+      block.simpleTranslate(translation)
+    }
+    this.fixMatrix()
   }
 
   wannaLeft() {
     const translation = new RelativePosition(-1,0)
-
-    const canMove = this.canTranslate(translation)
-    
-    if (!canMove) return
-
-    this.takeSnapshot()
-    
-    for (const block of this.blocks) {
-      block.left()
-    }
-    this.fixMatrix()
+    this.translate(translation)
   }
 
   wannaRight() {
     const translation = new RelativePosition(1,0)
-
-    const canMove = this.canTranslate(translation)
-    
-    if (!canMove) return
-
-    this.takeSnapshot()
-    
-    for (const block of this.blocks) {
-      block.right()
-    }
-    this.fixMatrix()
+    this.translate(translation)    
   }
 
   canDown() {
