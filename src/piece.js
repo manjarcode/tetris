@@ -1,5 +1,4 @@
 import { RelativePosition } from "./block"
-import { gameTooglePause } from "./game"
 
 export default class Piece {
   constructor(blocks, rotateCenter, rotateTable) {
@@ -11,13 +10,23 @@ export default class Piece {
     this.rotateTable = rotateTable
   }
 
-  canTranslate(translation) {
+  wannaLeft() {
+    const translation = new RelativePosition(-1,0)
+    this.#translate(translation)
+  }
+
+  wannaRight() {
+    const translation = new RelativePosition(1,0)
+    this.#translate(translation)    
+  }
+
+  #canTranslate(translation) {
     const areValid = this.blocks.every(b => b.canTranslate(translation))
     return areValid    
   }
 
-  translate(translation) {
-    const canMove = this.canTranslate(translation)
+  #translate(translation) {
+    const canMove = this.#canTranslate(translation)
     
     if (!canMove) return
 
@@ -29,24 +38,28 @@ export default class Piece {
     this.fixMatrix()
   }
 
-  wannaLeft() {
-    const translation = new RelativePosition(-1,0)
-    this.translate(translation)
+  wannaRotate() {
+    if (this.canRotate()) {      
+      this.rotate()
+    }
   }
 
-  wannaRight() {
-    const translation = new RelativePosition(1,0)
-    this.translate(translation)    
+  canRotate() {
+    throw new Error('must be implemented')
+  }
+
+  rotate() {
+    throw new Error('must be implemented')
   }
 
   canDown() {
-    return this.blocks.every(b=> b.canDown())
+    const translation = new RelativePosition(0,1)
+    return this.#canTranslate(translation)    
   }
 
   down() {
-    for (const block of this.blocks) {
-      block.down()
-    }
+    const translation = new RelativePosition(0,1)
+    this.#translate(translation)
   }
 
   destroy() {
@@ -81,11 +94,5 @@ export default class Piece {
     this.blocks = this.blocks.sort((a,b) => {
       return b.y - a.y
     })
-  }
-
-  wannaRotate() {
-    if (this.canRotate()) {      
-      this.rotate()
-    }
   }
 }
