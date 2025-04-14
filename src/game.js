@@ -1,7 +1,8 @@
-import {ROWS, COLS, SPEED} from './constants.js'
+import {SPEED} from './constants.js'
 import Tetris from './tetris.js'
 import PieceBuilder from './pieceBuilder.js'
 import Matrix from './matrix.js'
+import Drawer from './drawer.js'
 
 const matrix = new Matrix()
 
@@ -12,12 +13,11 @@ let stopIntervalId = null
 function gameStartup() {
   const canvas = document.getElementById("game")
   const ctx = canvas.getContext("2d")
+  const drawer = new Drawer(ctx)
 
   const pieceBuilder = new PieceBuilder(matrix)
 
-  game = new Tetris(ctx, matrix, pieceBuilder)
-  game.render()
-
+  game = new Tetris(drawer, matrix, pieceBuilder)
   game.iterate()
   stopIntervalId = window.setInterval(() => {
     gameLoop()

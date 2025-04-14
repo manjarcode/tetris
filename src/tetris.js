@@ -1,149 +1,99 @@
-import Drawer from './drawer.js'
-import {COLS, ROWS, MOVE, DOWN_ITERATIONS} from './constants.js'
+import {MOVE, DOWN_ITERATIONS} from './constants.js'
 
 export default class Tetris {
-  constructor(canvas, matrix, pieceBuilder) {
+  #isRotating
+  #isPaused
+
+  constructor(drawer, matrix, pieceBuilder) {
     this.matrix = matrix
-    this.drawer = new Drawer(canvas)
+    this.drawer = drawer
     this.pieceBuilder = pieceBuilder
 
     this.iteration = 0
     this.isOver = false
 
-    this.rotate = false
+    this.#isRotating = false
+    this.#isPaused = false
 
-    this.paused = false
-    this.buildActive()
+    this.active = this.pieceBuilder.getRandom()
   }
 
   iterate() {
-    this.moveActive()
+    this.#moveActive()
 
-    if (this.rotate) {
+    if (this.#isRotating) {
       this.active.wannaRotate()
-      this.rotate = false
+      this.#isRotating = false
     }
 
-    if (this.mustDown()) {
-      this.down()
+    if (this.#isDownIteration()) {
+      this.#consolidateDown()
     }
 
-    this.render()
+    this.#render()
   }
 
-  // TODO: Class Matrix
-  hasTetrisLines() {    
-    const lines = []
-    for (let i=0; i<ROWS;i++) {
-      let hasLine = true
-      for (let j=0; j<COLS && hasLine;j++) {  
-        hasLine = this.matrix.at(j,i).get() > 0 && hasLine //TODO: igual se rompe en ciertas situaciones
-      }
-      if (hasLine) {
-        lines.push(i)
-      }
-    }
-
-    return lines
-  }
-
-  applyTetris(lines) {
-    console.log('LINES', lines)
-    for (const line of lines) {
-      this.applyLine(line)
-    }
-  }
-
-  applyLine(line) {
-    for (let i=line; i>0; i--) {
-      for (let j=0; j<COLS; j++) {
-        const color = this.matrix.at(j,i-1).get()
-        this.matrix.at(j,i).set(color)
-      }
-    }
-  }
-
-  tooglePause() {
-    this.paused = !this.paused
-  }
-
-  draw(x, y) {
-    const color = this.matrix.at(x,y).get()
-    if (color > 0) {
-      this.drawer.cell(x, y, color)
-    }
-  }
-
-  render() {
-    this.drawer.clear()
-    this.drawer.matrix(this.matrix)
-    this.drawer.piece(this.active)
-  }
-
-  down() {
-    if (this.active.canDown()) {
-      this.active.down()
-    } else {
-      this.active.destroy()
-      this.active = null
-      this.buildActive()
-
-      const lines = this.hasTetrisLines()
-      if (lines.length > 0) {
-        this.applyTetris(lines)
-      }
-
-      this.updateGameOver()
-    }
-  } 
-
-  updateGameOver() { 
-    this.isOver = !this.active.canDown()
-  }
-
-  mustDown() {
-    return this.iteration++ % DOWN_ITERATIONS === 0
-  }
-
-  moveActive() {
+  #moveActive() {
     if (this.move === MOVE.LEFT) {
-      console.log('moving left')
       this.active.wannaLeft()
     }
 
     if (this.move === MOVE.RIGHT) {
-      console.log('moving right')
       this.active.wannaRight()
     }
 
     this.move = MOVE.NONE
   }
 
-  buildActive() {
+  #isDownIteration() {
+    return this.iteration++ % DOWN_ITERATIONS === 0
+  }
+
+  #consolidateDown() {
+    if (this.active.canDown()) {
+      this.active.down()
+    } else {
+      this.#touchGround()
+    }
+  }
+
+  #touchGround() {
+    this.#swapActive()
+    this.matrix.clear()    
+    this.#checkForGameOver()
+  }
+
+  #swapActive() {
+    this.active.destroy()
+    this.active = null
     this.active = this.pieceBuilder.getRandom()
   }
 
+  #checkForGameOver() { 
+    this.isOver = !this.active.canDown()
+  }
+
+  #render() {
+    this.drawer.clear()
+    this.drawer.matrix(this.matrix)
+    this.drawer.piece(this.active)
+  }
+
+  tooglePause() {
+    this.#isPaused = !this.#isPaused
+  }
+
   wannaLeft() {
-    console.log ('wanna left')
     this.move = MOVE.LEFT
   }
 
   wannaRight() {
-    console.log('wanna right')
     this.move = MOVE.RIGHT
   }
 
   wannaRotate() {
-    console.log('wanna rotate')
-    this.rotate = true
+    this.#isRotating = true
   }
-
-  status() {
-    console.log('active', this.active)
-    console.log('game', this.game)
-    console.log('matrix', this.matrix)
-  }
-
 
   over() {
     this.drawer.gameOver()

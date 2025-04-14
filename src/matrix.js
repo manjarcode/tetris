@@ -1,4 +1,4 @@
-import { COLS, ROWS } from "./constants"
+import { COLS, NO_COLOR, ROWS } from "./constants"
 import { nullish } from "./utils"
 
 export default class Matrix {
@@ -27,5 +27,37 @@ export default class Matrix {
     if (nullish(this.x) || nullish(this.y)) {
       throw new Error(`Coord (x,y) must be set but are (${this.x},${this.y})`)
     }      
+  }
+
+  clear() {
+    const lines = this.#findLines()
+
+    for (const line of lines) {
+      this.#clearSingleLine(line)
+    }
+  }
+  
+  #findLines() {    
+    const lines = []
+    for (let i=0; i<ROWS;i++) {
+      let hasLine = true
+      for (let j=0; j<COLS && hasLine;j++) {  
+        hasLine = this.matrix.at(j,i).get() > NO_COLOR && hasLine 
+      }
+      if (hasLine) {
+        lines.push(i)
+      }
+    }
+
+    return lines
+  }
+
+  #clearSingleLine(line) {
+    for (let i=line; i>0; i--) {
+      for (let j=0; j<COLS; j++) {
+        const color = this.matrix.at(j,i-1).get()
+        this.matrix.at(j,i).set(color)
+      }
+    }
   }
 }
