@@ -10,7 +10,7 @@ export default class Piece360 extends Piece {
       return false
     }
 
-    const areValid = this.blocks.reduce((result, block) => {
+    const areValid = this.getBlocks().reduce((result, block) => {
       const relativePosition = block.relativeTo(this.rotateCenter)
       const translation = this.rotateTable.apply(relativePosition)
       return result && block.canTranslate(translation)
@@ -20,7 +20,7 @@ export default class Piece360 extends Piece {
   }
 
   rotate() {
-    for (const block of this.blocks) {
+    for (const block of this.getBlocks()) {
       const relativePosition = block.relativeTo(this.rotateCenter)
       const translation = this.rotateTable.apply(relativePosition)
       block.translate(translation)

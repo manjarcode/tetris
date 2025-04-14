@@ -1,5 +1,3 @@
-import Piece from './piece.js' 
-
 import {random} from './utils.js'
 import {COLS} from './constants.js'
 import Block, {Vector} from './block.js'

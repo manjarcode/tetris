@@ -75,34 +75,9 @@ export default class Tetris {
   }
 
   render() {
-    this.table()
-
     this.drawer.clear()
-    for (let i=0; i<COLS; i++) {
-      for (let j=0; j<ROWS; j++) {
-        this.draw(i, j)
-      }
-    }
-
-    for (const block of this.active.blocks) {
-      this.drawer.block(block)
-    }
-  }
-
-  table() {
-    const table = document.getElementById('matrix')
-    table.innerHTML=""
-    for (let i=0; i<COLS; i++) {
-      const row = document.createElement('tr')
-      for (let j=0; j<ROWS; j++) {
-        const cell = document.createElement('td')
-        cell.textContent = this.matrix.at(i,j).get()
-        
-        row.appendChild(cell)
-      }
-
-      table.appendChild(row)
-    }
+    this.drawer.matrix(this.matrix)
+    this.drawer.piece(this.active)
   }
 
   down() {

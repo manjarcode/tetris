@@ -14,7 +14,7 @@ export default class Piece180 extends Piece {
 
     const table = this.isInverted ? this.reverseRotateTable : this.rotateTable
 
-    const areValid = this.blocks.reduce((result, block) => {
+    const areValid = this.getBlocks().reduce((result, block) => {
       const relativePosition = block.relativeTo(this.rotateCenter)
       const translation = table.apply(relativePosition)
       return result && block.canTranslate(translation)
@@ -26,7 +26,7 @@ export default class Piece180 extends Piece {
   rotate() {
     const table = this.isInverted ? this.reverseRotateTable : this.rotateTable
 
-    for (const block of this.blocks) {
+    for (const block of this.getBlocks()) {
       const relativePosition = block.relativeTo(this.rotateCenter)
       const translation = table.apply(relativePosition)
       block.translate(translation)

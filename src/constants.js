@@ -14,3 +14,5 @@ export const MOVE = {
   LEFT: 1,
   RIGHT: 2
 }
+export const colors = ["#FF6B6B", "#FF9F1C", "#FFD23F", "#17C3B2", "#227C9D", "#8B5CF6", "#E6E6EA"]
+export const borders = ["#C34C4C", "#B36D14", "#B8962E", "#0F8175", "#165166", "#5A3EAB", "#A1A1A5"]

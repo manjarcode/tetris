@@ -5,7 +5,28 @@ export default class Drawer {
     this.canvas = canvas
   }
 
+  matrix(matrix) {
+    for (let i=0; i<COLS; i++) {
+      for (let j=0; j<ROWS; j++) {
+        const color = matrix.at(i,j).get()
+        this.cell(i, j, color)      
+      }
+    }    
+  }
+
+  piece(piece) {
+    const blocks = piece.getBlocks()
+    for (const block of blocks) {
+      const [x,y] = block.getPosition()
+      const color = block.getColor()
+      this.cell(x,y,color)
+    }
+  }
+
   cell(x, y, color) {
+    if (color === 0) {
+      return
+    }
     const posX = x * 40
     const posY = y * 40
 
@@ -13,12 +34,6 @@ export default class Drawer {
     this.canvas.fillRect(posX, posY, BLOCK_SIZE, BLOCK_SIZE)
     this.canvas.strokeStyle = getDarkerColors(color)
     this.canvas.strokeRect(posX, posY, BLOCK_SIZE, BLOCK_SIZE)
-  }
-
-  block(block) {
-    const [x,y] = block.getPosition()
-    const color = block.getColor()
-    this.cell(x,y,color)
   }
 
   clear() {

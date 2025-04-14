@@ -1,13 +1,19 @@
 import { Vector } from "./block"
 
 export default class Piece {
+  #blocks;
+
   constructor(blocks, rotateCenter, rotateTable) {
-    this.blocks = blocks.sort((a,b) => {
+    this.#blocks = blocks.sort((a,b) => {
       return b.y - a.y
     })
 
     this.rotateCenter = rotateCenter
     this.rotateTable = rotateTable
+  }
+
+  getBlocks() {
+    return this.#blocks
   }
 
   wannaLeft() {
@@ -21,7 +27,7 @@ export default class Piece {
   }
 
   #canTranslate(translation) {
-    const areValid = this.blocks.every(b => b.canTranslate(translation))
+    const areValid = this.#blocks.every(b => b.canTranslate(translation))
     return areValid    
   }
 
@@ -30,7 +36,7 @@ export default class Piece {
     
     if (!canMove) return
 
-    for (const block of this.blocks) {
+    for (const block of this.#blocks) {
       block.translate(translation)
     }
   }
@@ -60,16 +66,16 @@ export default class Piece {
   }
 
   destroy() {
-    for (const block of this.blocks) {
+    for (const block of this.#blocks) {
       block.consolidate()
     }
 
-    for (let block of this.blocks) {
+    for (let block of this.#blocks) {
       block = null
     }
   }
 
   toString() {
-    return this.blocks.map(b => b.toString())
+    return this.#blocks.map(b => b.toString())
   }
 }
