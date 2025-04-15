@@ -29,7 +29,7 @@ export default class Matrix {
     }      
   }
 
-  clear() {
+  clearLines() {
     const lines = this.#findLines()
 
     for (const line of lines) {

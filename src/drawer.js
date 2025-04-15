@@ -10,9 +10,9 @@ export default class Drawer {
     for (let i=0; i<COLS; i++) {
       for (let j=0; j<ROWS; j++) {
         const color = matrix.at(i,j).get()
-        this.cell(i, j, color)      
+        this.cell(i, j, color)
       }
-    }    
+    }
   }
 
   piece(piece) {

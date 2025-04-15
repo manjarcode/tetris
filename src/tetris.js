@@ -5,9 +5,8 @@ export default class Tetris {
   #isPaused
   #next
 
-  constructor(drawer, matrix, pieceBuilder) {
-    this.matrix = matrix
-    this.drawer = drawer
+  constructor(mainScreen, pieceBuilder) {
+    this.mainScreen = mainScreen
     this.pieceBuilder = pieceBuilder
 
     this.iteration = 0
@@ -61,14 +60,14 @@ export default class Tetris {
 
   #touchGround() {
     this.#swapActive()
-    this.matrix.clear()
+    this.mainScreen.clearLines()
     this.#checkForGameOver()
   }
 
   #swapActive() {
     this.active.destroy()
     this.active = null
-    this.active = this.#next
+    this.active = this.#next    
     this.#next = null
     this.#next = this.pieceBuilder.getRandom()
   }
@@ -78,9 +77,7 @@ export default class Tetris {
   }
 
   #render() {
-    this.drawer.clear()
-    this.drawer.matrix(this.matrix)
-    this.drawer.piece(this.active)
+    this.mainScreen.render(this.active)    
   }
 
   tooglePause() {
@@ -100,6 +97,6 @@ export default class Tetris {
   }
 
   over() {
-    this.drawer.gameOver()
+    this.mainScreen.gameOver()
   }
 }

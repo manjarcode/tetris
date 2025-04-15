@@ -3,10 +3,10 @@ import Tetris from './tetris.js'
 import PieceBuilder from './pieceBuilder.js'
 import Matrix from './matrix.js'
 import Drawer from './drawer.js'
+import Screen from './screen.js'
 
-const matrix = new Matrix()
 
-let game = null
+let tetris = null
 let error = null
 let stopIntervalId = null
 
@@ -14,11 +14,14 @@ function gameStartup() {
   const canvas = document.getElementById("game")
   const ctx = canvas.getContext("2d")
   const drawer = new Drawer(ctx)
+  const matrix = new Matrix()
+
+  const mainScreen = new Screen(matrix, drawer)
 
   const pieceBuilder = new PieceBuilder(matrix)
 
-  game = new Tetris(drawer, matrix, pieceBuilder)
-  game.iterate()
+  tetris = new Tetris(mainScreen, pieceBuilder)
+  tetris.iterate()
   stopIntervalId = window.setInterval(() => {
     gameLoop()
   }, SPEED)
@@ -26,13 +29,13 @@ function gameStartup() {
 
 function gameLoop() {
   try {
-    if (!game.isOver && !error && !game.paused) {
-      game.iterate()
+    if (!tetris.isOver && !error && !tetris.paused) {
+      tetris.iterate()
     }
 
-    if (game.isOver){
+    if (tetris.isOver){
       window.clearInterval(stopIntervalId)
-      game.over()
+      tetris.over()
     }
 
   } catch (err) {
@@ -42,10 +45,10 @@ function gameLoop() {
 }
 
 const keyMapping = {
-  "ArrowLeft": () => game.wannaLeft(),
-  "ArrowRight": () => game.wannaRight(),
-  "Space": () => game.wannaRotate(),
-  "Escape": () => game.tooglePause()
+  "ArrowLeft": () => tetris.wannaLeft(),
+  "ArrowRight": () => tetris.wannaRight(),
+  "Space": () => tetris.wannaRotate(),
+  "Escape": () => tetris.tooglePause()
 }
 
 document.addEventListener("keyup", ev => {
@@ -59,6 +62,3 @@ document.addEventListener("keyup", ev => {
 })
 
 window.onload = () => gameStartup()
-
-
-export const gameTooglePause = () => { game.tooglePause() }
