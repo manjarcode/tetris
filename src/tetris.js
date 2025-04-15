@@ -3,6 +3,7 @@ import {MOVE, DOWN_ITERATIONS} from './constants.js'
 export default class Tetris {
   #isRotating
   #isPaused
+  #next
 
   constructor(drawer, matrix, pieceBuilder) {
     this.matrix = matrix
@@ -16,6 +17,7 @@ export default class Tetris {
     this.#isPaused = false
 
     this.active = this.pieceBuilder.getRandom()
+    this.#next = this.pieceBuilder.getRandom()
   }
 
   iterate() {
@@ -59,14 +61,16 @@ export default class Tetris {
 
   #touchGround() {
     this.#swapActive()
-    this.matrix.clear()    
+    this.matrix.clear()
     this.#checkForGameOver()
   }
 
   #swapActive() {
     this.active.destroy()
     this.active = null
-    this.active = this.pieceBuilder.getRandom()
+    this.active = this.#next
+    this.#next = null
+    this.#next = this.pieceBuilder.getRandom()
   }
 
   #checkForGameOver() { 

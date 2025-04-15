@@ -1,5 +1,3 @@
-import { gameTooglePause } from "./game"
-
 export class RotateTable {
   constructor(rotations) {
     this.rotations = rotations
@@ -11,7 +9,7 @@ export class RotateTable {
       rotation.from.y === relativePosition.y
     )
     if (!found) {
-      console.log(`not found (${relativePosition.x},${relativePosition.y})`)
+      console.log(`Rotation not found (${relativePosition.x},${relativePosition.y})`)
     }
     return found.to
   }

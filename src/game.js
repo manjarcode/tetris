@@ -36,8 +36,7 @@ function gameLoop() {
     }
 
   } catch (err) {
-    game.status()
-    error = err
+    window.clearInterval(stopIntervalId)
     console.error(err)
   }
 }

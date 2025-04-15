@@ -36,13 +36,13 @@ export default class Matrix {
       this.#clearSingleLine(line)
     }
   }
-  
+
   #findLines() {    
     const lines = []
     for (let i=0; i<ROWS;i++) {
       let hasLine = true
-      for (let j=0; j<COLS && hasLine;j++) {  
-        hasLine = this.matrix.at(j,i).get() > NO_COLOR && hasLine 
+      for (let j=0; j<COLS && hasLine;j++) {   
+        hasLine = this.matrix[j][i] > NO_COLOR && hasLine 
       }
       if (hasLine) {
         lines.push(i)
@@ -55,8 +55,8 @@ export default class Matrix {
   #clearSingleLine(line) {
     for (let i=line; i>0; i--) {
       for (let j=0; j<COLS; j++) {
-        const color = this.matrix.at(j,i-1).get()
-        this.matrix.at(j,i).set(color)
+        const color = this.matrix[j][i-1]
+        this.matrix[j][i]=color
       }
     }
   }

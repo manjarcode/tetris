@@ -1,15 +1,13 @@
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fafafa;
+  gap: 8px;
+}
+
 canvas {
   border: 1px solid;
-}
-
-#matrix {
-  position: absolute;
-  top:0; 
-  left: 420px;
-}
-
-td {
-  width: 20px;
-  height: 20px;
 }
