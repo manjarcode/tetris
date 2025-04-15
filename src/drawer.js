@@ -7,8 +7,8 @@ export default class Drawer {
   }
 
   matrix(matrix) {
-    for (let i=0; i<COLS; i++) {
-      for (let j=0; j<ROWS; j++) {
+    for (let i=0; i<matrix.getColumns(); i++) {
+      for (let j=0; j<matrix.getRows(); j++) {
         const color = matrix.at(i,j).get()
         this.cell(i, j, color)
       }

@@ -1,9 +1,19 @@
-import { COLS, NO_COLOR, ROWS } from "./constants"
+import { NO_COLOR} from "./constants"
 import { nullish } from "./utils"
 
 export default class Matrix {
-  constructor() {
-    this.matrix = Array.from({ length: COLS }, () => Array(ROWS).fill(0))
+  constructor(columns, rows) {
+    this.columns = columns
+    this.rows = rows
+    this.matrix = Array.from({ length: columns }, () => Array(rows).fill(0))
+  }
+
+  getColumns() {
+    return this.columns
+  }
+
+  getRows() {
+    return this.rows
   }
 
   at(x,y) {
@@ -39,9 +49,9 @@ export default class Matrix {
 
   #findLines() {    
     const lines = []
-    for (let i=0; i<ROWS;i++) {
+    for (let i=0; i<this.rows;i++) {
       let hasLine = true
-      for (let j=0; j<COLS && hasLine;j++) {   
+      for (let j=0; j<this.columns && hasLine;j++) {   
         hasLine = this.matrix[j][i] > NO_COLOR && hasLine 
       }
       if (hasLine) {
@@ -54,7 +64,7 @@ export default class Matrix {
 
   #clearSingleLine(line) {
     for (let i=line; i>0; i--) {
-      for (let j=0; j<COLS; j++) {
+      for (let j=0; j<this.columns; j++) {
         const color = this.matrix[j][i-1]
         this.matrix[j][i]=color
       }

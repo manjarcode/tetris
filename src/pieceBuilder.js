@@ -10,40 +10,39 @@ export default class PieceBuilder {
     this.matrix = matrix
   }
 
-  getRandom() {
+  getRandom(x, y) {
     const map = [this.buildSquare, this.buildT, this.buildL, this.buildLPrime, this.buildS, this.buildSPrime, this.buildStick]
 
     const index = random(map.length)
 
     const action = map[index].bind(this)
 
-    const piece = action()
+    const piece = action(x, y)
 
     return piece
   }
 
-  buildSquare() {
-    const x = random(COLS-1)
+  buildSquare(x,y) {
+    
     const randomColor = 1
   
-    const b1 = new Block(x, 0, randomColor, this.matrix)
-    const b2 = new Block(x +1, 0, randomColor, this.matrix)
-    const b3 = new Block(x, 1, randomColor, this.matrix)
-    const b4 = new Block(x + 1, 1, randomColor, this.matrix)
+    const b1 = new Block(x+0, y+0, randomColor, this.matrix)
+    const b2 = new Block(x+1, y+0, randomColor, this.matrix)
+    const b3 = new Block(x+0, y+1, randomColor, this.matrix)
+    const b4 = new Block(x+1, y+1, randomColor, this.matrix)
     
     const piece = new Piece360([ b1, b2, b3, b4], null, null)
   
     return piece
   }
   
-  buildT() {
-    const x = 4
+  buildT(x, y) {
     const randomColor = 2
   
-    const b1 = new Block(x+1, 0, randomColor, this.matrix)
-    const b2 = new Block(x+1, 1, randomColor, this.matrix)
-    const b3 = new Block(x+1, 2, randomColor, this.matrix)
-    const b4 = new Block(x+0, 1, randomColor, this.matrix)
+    const b1 = new Block(x+1, y+0, randomColor, this.matrix)
+    const b2 = new Block(x+1, y+1, randomColor, this.matrix)
+    const b3 = new Block(x+1, y+2, randomColor, this.matrix)
+    const b4 = new Block(x+0, y+1, randomColor, this.matrix)
   
     
     const rotateTable = new RotateTable([
@@ -59,14 +58,13 @@ export default class PieceBuilder {
     return piece
   }
 
-  buildL() {
-    const x = 4
+  buildL(x, y) {
     const randomColor = 3
   
-    const b1 = new Block(x+0, 0, randomColor, this.matrix)
-    const b2 = new Block(x+0, 1, randomColor, this.matrix)
-    const b3 = new Block(x+0, 2, randomColor, this.matrix)
-    const b4 = new Block(x+1, 0, randomColor, this.matrix)
+    const b1 = new Block(x+0, y+0, randomColor, this.matrix)
+    const b2 = new Block(x+0, y+1, randomColor, this.matrix)
+    const b3 = new Block(x+0, y+2, randomColor, this.matrix)
+    const b4 = new Block(x+1, y+0, randomColor, this.matrix)
   
     
     const rotateTable = new RotateTable([
@@ -86,14 +84,13 @@ export default class PieceBuilder {
     return piece
   }
 
-  buildLPrime() {
-    const x = 4
+  buildLPrime(x, y) {
     const randomColor = 4
   
-    const b1 = new Block(x+1, 0, randomColor, this.matrix)
-    const b2 = new Block(x+1, 1, randomColor, this.matrix)
-    const b3 = new Block(x+1, 2, randomColor, this.matrix)
-    const b4 = new Block(x+0, 0, randomColor, this.matrix)
+    const b1 = new Block(x+1, y+0, randomColor, this.matrix)
+    const b2 = new Block(x+1, y+1, randomColor, this.matrix)
+    const b3 = new Block(x+1, y+2, randomColor, this.matrix)
+    const b4 = new Block(x+0, y+0, randomColor, this.matrix)
   
     
     const rotateTable = new RotateTable([
@@ -113,14 +110,13 @@ export default class PieceBuilder {
     return piece
   }
 
-  buildStick() {
-    const x = 4
+  buildStick(x, y) {
     const randomColor = 5
   
-    const b1 = new Block(x, 0, randomColor, this.matrix)
-    const b2 = new Block(x, 1, randomColor, this.matrix)
-    const b3 = new Block(x, 2, randomColor, this.matrix)
-    const b4 = new Block(x, 3, randomColor, this.matrix)
+    const b1 = new Block(x+0, y+0, randomColor, this.matrix)
+    const b2 = new Block(x+0, y+1, randomColor, this.matrix)
+    const b3 = new Block(x+0, y+2, randomColor, this.matrix)
+    const b4 = new Block(x+0, y+3, randomColor, this.matrix)
 
 
     const rotateTable = new RotateTable([
@@ -144,14 +140,13 @@ export default class PieceBuilder {
   }
 
 
-  buildS() {
-    const x = 4
+  buildS(x, y) {
     const randomColor = 6
   
-    const b1 = new Block(x-1, 0, randomColor, this.matrix)
-    const b2 = new Block(x+0, 0, randomColor, this.matrix)
-    const b3 = new Block(x+0, 1, randomColor, this.matrix)
-    const b4 = new Block(x+1, 1, randomColor, this.matrix)
+    const b1 = new Block(x-1, y+0, randomColor, this.matrix)
+    const b2 = new Block(x+0, y+0, randomColor, this.matrix)
+    const b3 = new Block(x+0, y+1, randomColor, this.matrix)
+    const b4 = new Block(x+1, y+1, randomColor, this.matrix)
 
     const rotateTable = new RotateTable([
       new Rotation(new Vector(0,0), new Vector(0,0)),
@@ -173,14 +168,13 @@ export default class PieceBuilder {
   }
 
 
-  buildSPrime() {
-    const x = 4
+  buildSPrime(x, y) {
     const randomColor = 7
   
-    const b1 = new Block(x+1, 0, randomColor, this.matrix)
-    const b2 = new Block(x+0, 0, randomColor, this.matrix)
-    const b3 = new Block(x+0, 1, randomColor, this.matrix)
-    const b4 = new Block(x-1, 1, randomColor, this.matrix)
+    const b1 = new Block(x+1, y+0, randomColor, this.matrix)
+    const b2 = new Block(x+0, y+0, randomColor, this.matrix)
+    const b3 = new Block(x+0, y+1, randomColor, this.matrix)
+    const b4 = new Block(x-1, y+1, randomColor, this.matrix)
 
     const rotateTable = new RotateTable([
       new Rotation(new Vector(0,0), new Vector(0,0)),

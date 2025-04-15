@@ -18,12 +18,12 @@ export default class Piece {
 
   wannaLeft() {
     const translation = new Vector(-1,0)
-    this.#translate(translation)
+    this.translate(translation)
   }
 
   wannaRight() {
     const translation = new Vector(1,0)
-    this.#translate(translation)    
+    this.translate(translation)    
   }
 
   #canTranslate(translation) {
@@ -31,7 +31,7 @@ export default class Piece {
     return areValid    
   }
 
-  #translate(translation) {
+  translate(translation) {
     const canMove = this.#canTranslate(translation)
     
     if (!canMove) return
@@ -62,7 +62,7 @@ export default class Piece {
 
   down() {
     const translation = new Vector(0,1)
-    this.#translate(translation)
+    this.translate(translation)
   }
 
   destroy() {

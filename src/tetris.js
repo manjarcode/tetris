@@ -1,3 +1,4 @@
+import { Vector } from './block.js'
 import {MOVE, DOWN_ITERATIONS} from './constants.js'
 
 export default class Tetris {
@@ -5,8 +6,9 @@ export default class Tetris {
   #isPaused
   #next
 
-  constructor(mainScreen, pieceBuilder) {
+  constructor(mainScreen, nextScreen, pieceBuilder) {
     this.mainScreen = mainScreen
+    this.nextScreen = nextScreen
     this.pieceBuilder = pieceBuilder
 
     this.iteration = 0
@@ -15,8 +17,30 @@ export default class Tetris {
     this.#isRotating = false
     this.#isPaused = false
 
-    this.active = this.pieceBuilder.getRandom()
-    this.#next = this.pieceBuilder.getRandom()
+    this.active = this.pieceBuilder.getRandom(4, 0)
+    this.#next = this.pieceBuilder.getRandom(0, 0)
+
+    nextScreen.render(this.#next)
+  }
+
+  wannaLeft() {
+    this.move = MOVE.LEFT
+  }
+
+  wannaRight() {
+    this.move = MOVE.RIGHT
+  }
+
+  wannaRotate() {
+    this.#isRotating = true
+  }
+
+  tooglePause() {
+    this.#isPaused = !this.#isPaused
+  }
+
+  over() {
+    this.mainScreen.gameOver()
   }
 
   iterate() {
@@ -66,10 +90,12 @@ export default class Tetris {
 
   #swapActive() {
     this.active.destroy()
-    this.active = null
-    this.active = this.#next    
+    this.active = null    
+    this.active = this.#next
+    this.active.translate(new Vector(4, 0))
     this.#next = null
-    this.#next = this.pieceBuilder.getRandom()
+    this.#next = this.pieceBuilder.getRandom(1, 1)
+    this.nextScreen.render(this.#next)
   }
 
   #checkForGameOver() { 
@@ -78,25 +104,5 @@ export default class Tetris {
 
   #render() {
     this.mainScreen.render(this.active)    
-  }
-
-  tooglePause() {
-    this.#isPaused = !this.#isPaused
-  }
-
-  wannaLeft() {
-    this.move = MOVE.LEFT
-  }
-
-  wannaRight() {
-    this.move = MOVE.RIGHT
-  }
-
-  wannaRotate() {
-    this.#isRotating = true
-  }
-
-  over() {
-    this.mainScreen.gameOver()
   }
 }
