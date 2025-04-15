@@ -2,11 +2,10 @@
   "name": "tetris",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "build": "parcel build",
+    "build": "parcel build ./index.html --dist-dir build",
     "dev": "parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +14,10 @@
   "license": "ISC",
   "dependencies": {
     "parcel": "^2.14.1"
+  },
+  "targets": {
+    "default": {
+      "distDir": "./docs"
+    }
   }
 }
