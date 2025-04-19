@@ -9,7 +9,7 @@ export default class PieceBuilder {
     this.matrix = matrix
   }
 
-  getRandom(x, y) {
+  getRandom() {
     const map = [
       this.buildSquare, 
       this.buildT,
@@ -24,7 +24,7 @@ export default class PieceBuilder {
 
     const action = map[index].bind(this)
 
-    const piece = action(x, y)
+    const piece = action(4, 0)
 
     return piece
   }
