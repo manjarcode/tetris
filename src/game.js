@@ -45,7 +45,6 @@ const keyMapping = {
 }
 
 document.addEventListener("keyup", ev => {
-
   const {key,code} = ev
   const index = code ?? key
 
