@@ -10,4 +10,16 @@ body {
 
 canvas {
   border: 1px solid;
+  background-color: #ffffff;
 }
+
+.next {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;     /* centra verticalmente */
+  justify-content: center; /* centra horizontalmente */
+  width: 200px;
+  height: 200px;
+  border: 1px solid;
+}
+

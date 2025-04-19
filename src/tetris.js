@@ -6,9 +6,8 @@ export default class Tetris {
   #isPaused
   #next
 
-  constructor(mainScreen, nextScreen, pieceBuilder) {
+  constructor(mainScreen, pieceBuilder) {
     this.mainScreen = mainScreen
-    this.nextScreen = nextScreen
     this.pieceBuilder = pieceBuilder
 
     this.iteration = 0
@@ -20,7 +19,8 @@ export default class Tetris {
     this.active = this.pieceBuilder.getRandom(4, 0)
     this.#next = this.pieceBuilder.getRandom(0, 0)
 
-    nextScreen.render(this.#next)
+    const image = this.active.getImage()
+    this.mainScreen.drawNext(this.#next.getImage())
   }
 
   wannaLeft() {
@@ -99,7 +99,7 @@ export default class Tetris {
     this.active.translate(new Vector(4, 0))
     this.#next = null
     this.#next = this.pieceBuilder.getRandom(1, 1)
-    this.nextScreen.render(this.#next)
+    this.mainScreen.drawNext(this.#next.getImage())
   }
 
   #checkForGameOver() { 

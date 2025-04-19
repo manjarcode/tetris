@@ -10,12 +10,10 @@ let stopIntervalId = null
 
 function gameStartup() {
   const matrix = new Matrix(COLS, ROWS)
-  const mainScreen = Screen.create("game", matrix)
+  const mainScreen = Screen.create("game", matrix, "next")
   const pieceBuilder = new PieceBuilder(matrix)
 
-  const nextScreen = Screen.create("next", new Matrix(5, 5))
-
-  tetris = new Tetris(mainScreen, nextScreen, pieceBuilder)
+  tetris = new Tetris(mainScreen, pieceBuilder)
   tetris.iterate()
   stopIntervalId = window.setInterval(() => {
     gameLoop()

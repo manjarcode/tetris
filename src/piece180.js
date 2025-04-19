@@ -1,8 +1,8 @@
 import Piece from "./piece"
 
 export default class Piece180 extends Piece {
-  constructor(blocks, rotateCenter, rotateTable, reverseRotateTable) {
-    super(blocks, rotateCenter, rotateTable)
+  constructor(blocks, rotateCenter, rotateTable, reverseRotateTable, image) {
+    super(blocks, rotateCenter, rotateTable, image)
     this.isInverted = false
     this.reverseRotateTable = reverseRotateTable
   }

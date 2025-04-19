@@ -1,8 +1,8 @@
 import Piece from "./piece"
 
 export default class Piece360 extends Piece {
-  constructor(blocks, rotateCenter, rotateTable) {
-    super(blocks,rotateCenter,rotateTable)
+  constructor(blocks, rotateCenter, rotateTable, image) {
+    super(blocks,rotateCenter,rotateTable, image)
   }
 
   canRotate() {
