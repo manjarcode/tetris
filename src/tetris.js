@@ -35,7 +35,7 @@ export default class Tetris {
     this.#isRotating = true
   }
 
-  tooglePause() {
+  togglePause() {
     this.#isPaused = !this.#isPaused
   }
 
@@ -44,6 +44,10 @@ export default class Tetris {
   }
 
   iterate() {
+    if (this.#isPaused) {
+      return
+    }
+    
     this.#moveActive()
 
     if (this.#isRotating) {

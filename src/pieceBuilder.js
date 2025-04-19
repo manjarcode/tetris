@@ -1,5 +1,4 @@
 import {random} from './utils.js'
-import {COLS} from './constants.js'
 import Block, {Vector} from './block.js'
 import { RotateTable, Rotation } from './rotateTable.js'
 import Piece360 from './piece360.js'
@@ -11,7 +10,15 @@ export default class PieceBuilder {
   }
 
   getRandom(x, y) {
-    const map = [this.buildSquare, this.buildT, this.buildL, this.buildLPrime, this.buildS, this.buildSPrime, this.buildStick]
+    const map = [
+      this.buildSquare, 
+      this.buildT,
+      this.buildL,
+      this.buildSeven,
+      this.buildS,
+      this.buildZ,
+      this.buildStick
+    ]
 
     const index = random(map.length)
 
@@ -31,7 +38,8 @@ export default class PieceBuilder {
     const b3 = new Block(x+0, y+1, randomColor, this.matrix)
     const b4 = new Block(x+1, y+1, randomColor, this.matrix)
     
-    const piece = new Piece360([ b1, b2, b3, b4], null, null)
+    const image = "img/square.png"
+    const piece = new Piece360([ b1, b2, b3, b4], null, null, image)
   
     return piece
   }
@@ -44,7 +52,6 @@ export default class PieceBuilder {
     const b3 = new Block(x+1, y+2, randomColor, this.matrix)
     const b4 = new Block(x+0, y+1, randomColor, this.matrix)
   
-    
     const rotateTable = new RotateTable([
       new Rotation(new Vector(0,0), new Vector(0,0)),
       new Rotation(new Vector(-1,0), new Vector(1,-1)),
@@ -53,7 +60,8 @@ export default class PieceBuilder {
       new Rotation(new Vector(0,-1), new Vector(1,1)),
     ])
   
-    const piece = new Piece360([ b1, b2, b3, b4], b2, rotateTable)
+    const image = "img/t.png"
+    const piece = new Piece360([ b1, b2, b3, b4], b2, rotateTable, image)
   
     return piece
   }
@@ -79,12 +87,13 @@ export default class PieceBuilder {
       new Rotation(new Vector(-1,-1), new Vector(2,0))
     ])
   
-    const piece = new Piece360([ b1, b2, b3, b4], b2, rotateTable)
+    const image = "img/l.png"
+    const piece = new Piece360([ b1, b2, b3, b4], b2, rotateTable, image)
   
     return piece
   }
 
-  buildLPrime(x, y) {
+  buildSeven(x, y) {
     const randomColor = 4
   
     const b1 = new Block(x+1, y+0, randomColor, this.matrix)
@@ -105,7 +114,8 @@ export default class PieceBuilder {
       new Rotation(new Vector(-1,-1), new Vector(2,0))
     ])
   
-    const piece = new Piece360([ b1, b2, b3, b4], b2, rotateTable)
+    const image = "img/seven.png"
+    const piece = new Piece360([ b1, b2, b3, b4], b2, rotateTable, image)
   
     return piece
   }
@@ -134,7 +144,8 @@ export default class PieceBuilder {
     ])
 
 
-    const piece = new Piece180([ b1, b2, b3, b4], b2, rotateTable, inverseRotateTable)
+    const image = "img/stick.png"
+    const piece = new Piece180([ b1, b2, b3, b4], b2, rotateTable, inverseRotateTable, image)
 
     return piece
   }
@@ -162,13 +173,13 @@ export default class PieceBuilder {
       new Rotation(new Vector(0,1), new Vector(1,-1)), 
     ])
 
-    const piece = new Piece180([ b1, b2, b3, b4], b3, rotateTable, inverseRotateTable)
-
+    const image = "img/s.png"
+    const piece = new Piece180([ b1, b2, b3, b4], b3, rotateTable, inverseRotateTable, image)
     return piece
   }
 
 
-  buildSPrime(x, y) {
+  buildZ(x, y) {
     const randomColor = 7
   
     const b1 = new Block(x+1, y+0, randomColor, this.matrix)
@@ -190,7 +201,8 @@ export default class PieceBuilder {
       new Rotation(new Vector(0,1), new Vector(-1,-1)), 
     ])
 
-    const piece = new Piece180([ b1, b2, b3, b4], b3, rotateTable, inverseRotateTable)
+    const image = "img/z.png"
+    const piece = new Piece180([ b1, b2, b3, b4], b3, rotateTable, inverseRotateTable, image)
 
     return piece
   }

@@ -13,7 +13,7 @@ function gameStartup() {
   const mainScreen = Screen.create("game", matrix)
   const pieceBuilder = new PieceBuilder(matrix)
 
-  const nextScreen = Screen.create("next", new Matrix(4,4))
+  const nextScreen = Screen.create("next", new Matrix(5, 5))
 
   tetris = new Tetris(mainScreen, nextScreen, pieceBuilder)
   tetris.iterate()
@@ -43,7 +43,7 @@ const keyMapping = {
   "ArrowLeft": () => tetris.wannaLeft(),
   "ArrowRight": () => tetris.wannaRight(),
   "Space": () => tetris.wannaRotate(),
-  "Escape": () => tetris.tooglePause()
+  "Escape": () => tetris.togglePause()
 }
 
 document.addEventListener("keyup", ev => {

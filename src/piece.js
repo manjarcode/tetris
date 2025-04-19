@@ -1,15 +1,17 @@
 import { Vector } from "./block"
 
 export default class Piece {
-  #blocks;
+  #blocks
+  #image
 
-  constructor(blocks, rotateCenter, rotateTable) {
+  constructor(blocks, rotateCenter, rotateTable, image) {
     this.#blocks = blocks.sort((a,b) => {
       return b.y - a.y
     })
 
     this.rotateCenter = rotateCenter
     this.rotateTable = rotateTable
+    this.#image = image
   }
 
   getBlocks() {
@@ -73,6 +75,10 @@ export default class Piece {
     for (let block of this.#blocks) {
       block = null
     }
+  }
+
+  getImage() {
+    return this.#image
   }
 
   toString() {
