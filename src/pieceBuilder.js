@@ -4,13 +4,6 @@ import { RotateTable, Rotation } from './rotateTable.js'
 import Piece360 from './piece360.js'
 import Piece180 from './piece180.js'
 
-import s from './img/s.png'
-import t from './img/t.png'
-import l from './img/l.png'
-import z from './img/z.png'
-import stick from './img/stick.png'
-import seven from './img/seven.png'
-
 export default class PieceBuilder {
   constructor(matrix) {
     this.matrix = matrix
